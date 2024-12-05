@@ -23,7 +23,7 @@ namespace EstudosApiFront.Controllers
         {
             return View("Error!");
         } 
-        /*
+        
         [HttpGet]
         public async Task<ActionResult> IndexAsync()
         {
@@ -32,13 +32,14 @@ namespace EstudosApiFront.Controllers
                 string uriComplementar = "GetAll";
                 HttpClient httpClient = new HttpClient();
 
-                
                 HttpResponseMessage response = await httpClient.GetAsync(uriBase + uriComplementar);
                 string serialized = await response.Content.ReadAsStringAsync();
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    List<CategoriaViewModel> listaCategorias = await Task.Run(() => JsonConvert.DeserializeObject<List<CategoriaViewModel>>(serialized));
+                    
+                    List<CategoriaViewModel> listaCategorias = await Task.Run(() => System.Text.Json.JsonSerializer.Deserialize<List<CategoriaViewModel>>(serialized));
+            
                     return View(listaCategorias);
                 }
                 else
@@ -46,12 +47,12 @@ namespace EstudosApiFront.Controllers
                     throw new System.Exception(serialized);
                 }
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                
-                throw;
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("Index");
             }
         } 
-        */
+        
     }
 }
