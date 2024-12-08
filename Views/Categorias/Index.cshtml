@@ -1,29 +1,49 @@
 @model IEnumerable<EstudosApiFront.Models.CategoriaViewModel>
+
 @{
-    ViewBag.Title = "Categorias";
+    ViewBag.Title = "Categorias e Tarefas";
 }
-<h2>Lista de Categorias</h2>
+
+<h2>Lista de Categorias e Tarefas</h2>
 
 <table class="table">
-    <tr><!--Títulos das colunas da tabela-->
-        <th>@Html.DisplayNameFor(model => model.Id)</th>
-        <th>@Html.DisplayNameFor(model => model.Nome)</th>
-        <th>@Html.DisplayNameFor(model => model.Tarefas)</th>
-        <th></th>
-    </tr>
-    <!--Looping para escrever os dados na tabela-->
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.Id)</td>
-            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-            <td>@Html.DisplayFor(modelItem => item.Tarefas)</td>
-            <td><!--Coluna para Links/botões-->
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Deletar", "Delete", new { id = item.Id }
-                , new { onclick = "return confirm('Deseja realmente deletar este personagem ?');"})
-            </td>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>Tarefas</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var categoria in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => categoria.Id)</td>
+                <td>@Html.DisplayFor(model => categoria.Nome)</td>
+                <td>
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Prioridade</th>
+                                <th>Completo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var tarefa in categoria.Tarefas)
+                            {
+                                <tr>
+                                    <td>@tarefa.Id</td>
+                                    <td>@tarefa.Nome</td>
+                                    <td>@tarefa.Prioridade</td>
+                                    <td>@tarefa.Completo</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

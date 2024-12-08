@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using EstudosApiFront.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -51,6 +52,55 @@ namespace EstudosApiFront.Controllers
                 TempData["MensagemErro"] = ex.Message;
                 return RedirectToAction("Index");
             }
+        }
+        [HttpGet]
+        public async Task<ActionResult> EditAsync(int? id)
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response = await httpClient.GetAsync(uriBase + id.ToString());
+
+                string serialized = await response.Content.ReadAsStringAsync();
+
+                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    TarefaViewModel p = await Task.Run( () => JsonConvert.DeserializeObject<TarefaViewModel>(serialized));
+                    return View(p);
+                }else{
+                    throw new System.Exception(serialized);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("Index");
+            }
         } 
+        [HttpPost]
+        public async Task<ActionResult> EditAsync(TarefaViewModel p)
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+                var content = new StringContent(JsonConvert.SerializeObject(p));
+
+                HttpResponseMessage response = await httpClient.PostAsync(uriBase, content);
+                string serialized = await response.Content.ReadAsStringAsync();
+
+                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    TempData["Mensagem"] = string.Format("Tarefa {0}, Id {1} salva com sucesso!", p.Nome, serialized);
+                    return RedirectToAction("Index");
+                }
+                else
+                    throw new System.Exception(serialized);
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
