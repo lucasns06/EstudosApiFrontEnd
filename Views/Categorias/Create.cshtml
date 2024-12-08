@@ -1,0 +1,30 @@
+@model EstudosApiFront.Models.CategoriaViewModel
+
+@{
+    ViewBag.Title = "Criar Nova Categoria";
+}
+
+<h2>Criar uma Nova Categoria</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Nome, new { @class = "form-control" })
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <input type="submit" value="Salvar Categoria" class="btn btn-primary" />
+            </div>
+            <br>
+            <p>
+                @Html.ActionLink("Retornar", "Index")
+            </p>
+        </div>
+    </div>
+}

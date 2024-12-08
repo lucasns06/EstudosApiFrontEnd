@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using EstudosApiFront.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,11 @@ namespace EstudosApiFront.Controllers
         {
             return View("Error!");
         } 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
         [HttpGet]
         public async Task<ActionResult> IndexAsync()
         {
@@ -53,6 +59,59 @@ namespace EstudosApiFront.Controllers
             }
         } 
         [HttpGet]
+        public async Task<ActionResult> EditAsync(int? id)
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response = await httpClient.GetAsync(uriBase + id.ToString());
+
+                string serialized = await response.Content.ReadAsStringAsync();
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    CategoriaViewModel categoria = await Task.Run(() => JsonConvert.DeserializeObject<CategoriaViewModel>(serialized));
+                    return View(categoria);
+                }
+                else
+                {
+                    throw new System.Exception(serialized);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public async Task<ActionResult> EditAsync(CategoriaViewModel categoria)
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+
+                var content = new StringContent(JsonConvert.SerializeObject(categoria));
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                HttpResponseMessage response = await httpClient.PutAsync(uriBase, content);
+                string serialized = await response.Content.ReadAsStringAsync();
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    TempData["Mensagem"] = string.Format("categoria {0}, Id {1} salva com sucesso!", categoria.Nome, serialized);
+                    return RedirectToAction("Index");
+                }
+                else
+                    throw new System.Exception(serialized);
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpGet]
         public async Task<ActionResult> DetailsAsync(int? id)
         {
             try
@@ -74,6 +133,32 @@ namespace EstudosApiFront.Controllers
             {
                 TempData["MensagemErro"] = ex.Message;
                 return RedirectToAction("Index");
+            }
+        }
+        [HttpPost]
+        public async Task<ActionResult> CreateAsync(CategoriaViewModel categoria)
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+                var content = new StringContent(JsonConvert.SerializeObject(categoria));
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                HttpResponseMessage response = await httpClient.PostAsync(uriBase, content);
+                string serialized = await response.Content.ReadAsStringAsync();
+
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    TempData["Mensagem"] = string.Format("categoria {0}, Id {1} salva com sucesso!", categoria.Nome, serialized);
+                    return RedirectToAction("Index");
+                }
+                else
+                    throw new System.Exception(serialized);
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("Create");
             }
         }
         [HttpGet]
