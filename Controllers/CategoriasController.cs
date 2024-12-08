@@ -52,6 +52,52 @@ namespace EstudosApiFront.Controllers
                 return RedirectToAction("Index");
             }
         } 
-        
+        [HttpGet]
+        public async Task<ActionResult> DetailsAsync(int? id)
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response = await httpClient.GetAsync(uriBase + id.ToString());
+                string serialized = await response.Content.ReadAsStringAsync();
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    CategoriaViewModel categoria = await Task.Run(() => JsonConvert.DeserializeObject<CategoriaViewModel>(serialized));
+                    return View(categoria);
+                }
+                else
+                {
+                    throw new System.Exception(serialized);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+        [HttpGet]
+        public async Task<ActionResult> DeleteAsync(int id)
+        {
+            try
+            {
+                HttpClient httpClient = new HttpClient();
+ 
+                HttpResponseMessage response = await httpClient.DeleteAsync(uriBase + id.ToString());
+                string serialized = await response.Content.ReadAsStringAsync();
+
+                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    TempData["Mensagem"] = string.Format("Categoria Id {0} removida com sucesso", id);
+                    return RedirectToAction("Index");
+                }else
+                    throw new System.Exception(serialized);
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

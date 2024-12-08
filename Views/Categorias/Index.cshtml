@@ -1,10 +1,20 @@
 @model IEnumerable<EstudosApiFront.Models.CategoriaViewModel>
 
 @{
-    ViewBag.Title = "Categorias e Tarefas";
+    ViewBag.Title = "Categorias";
 }
-
-<h2>Lista de Categorias e Tarefas</h2>
+@if (@TempData["Mensagem"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Mensagem"]</div>
+}
+<!--Configuração para exibir mensagem de erro -->
+@if (@TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["MensagemErro"]</div>
+}
+<h2>Lista de Categorias</h2>
 
 <table class="table">
     <thead>
@@ -37,6 +47,12 @@
                         </tbody>
                     </table>
                 </td>
+                <td><!--Coluna para Links/botões-->
+                @Html.ActionLink("Editar", "Edit", new { id = categoria.Id }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = categoria.Id }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = categoria.Id }
+                , new { onclick = "return confirm('Deseja realmente deletar esta Categoria? Lembrando que vai deletar as tarefas dentro da categoria junto!');"})
+            </td>
             </tr>
         }
     </tbody>

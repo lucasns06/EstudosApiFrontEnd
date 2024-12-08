@@ -1,0 +1,37 @@
+@model EstudosApiFront.Models.CategoriaViewModel
+@{
+    ViewBag.Title = "Detalhes da Categoria";
+}
+<h2>Detalhes da Categoria</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+        <dd>@Html.DisplayFor(model => model.Id)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Nome)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Tarefas)</dt>
+        <dd>
+            @if (Model.Tarefas != null && Model.Tarefas.Any())
+            {
+                <ul>
+                    @foreach (var tarefa in Model.Tarefas)
+                    {
+                        <li>@tarefa.Nome</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>Não há tarefas associadas a esta categoria.</p>
+            }
+        </dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Retornar", "Index")
+</p>

@@ -175,7 +175,7 @@ namespace EstudosApiFront.Controllers
             {
                 HttpClient httpClient = new HttpClient();
  
-                HttpResponseMessage response = await httpClient.GetAsync(uriBase + id.ToString());
+                HttpResponseMessage response = await httpClient.DeleteAsync(uriBase + id.ToString());
                 string serialized = await response.Content.ReadAsStringAsync();
 
                 if(response.StatusCode == System.Net.HttpStatusCode.OK)
