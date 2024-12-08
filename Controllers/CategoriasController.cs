@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using EstudosApiFront.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace EstudosApiFront.Controllers
 {
-    // [Route("[controller]")]
     public class CategoriasController : Controller
     {
         public string uriBase = "https://estudosapi.azurewebsites.net/Categorias/";
@@ -23,7 +23,6 @@ namespace EstudosApiFront.Controllers
         {
             return View("Error!");
         } 
-        
         [HttpGet]
         public async Task<ActionResult> IndexAsync()
         {
@@ -38,8 +37,8 @@ namespace EstudosApiFront.Controllers
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     
-                    List<CategoriaViewModel> listaCategorias = await Task.Run(() => System.Text.Json.JsonSerializer.Deserialize<List<CategoriaViewModel>>(serialized));
-            
+                    List<CategoriaViewModel> listaCategorias = await Task.Run(() => JsonConvert.DeserializeObject<List<CategoriaViewModel>>(serialized));
+
                     return View(listaCategorias);
                 }
                 else

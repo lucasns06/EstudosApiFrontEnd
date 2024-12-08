@@ -10,7 +10,7 @@ namespace EstudosApiFront.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; } = string.Empty;
-        // public ICollection<Tarefa> Tarefas { get; set; } = new List<Tarefa>();
+        public ICollection<TarefaViewModel> Tarefas { get; set; } = new List<TarefaViewModel>();
         // public int? UsuarioId { get; set; }
         // [JsonIgnore]
         // public Usuario? Usuario { get; set; }

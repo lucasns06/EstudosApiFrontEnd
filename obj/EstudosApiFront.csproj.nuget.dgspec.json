@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Lucas\\DS\\A17\\EstudosApiFront\\EstudosApiFront.csproj": {}
+    "C:\\Users\\LUCAS\\Desktop\\projetos\\EstudosApiFrontEnd\\EstudosApiFront.csproj": {}
   },
   "projects": {
-    "D:\\Lucas\\DS\\A17\\EstudosApiFront\\EstudosApiFront.csproj": {
+    "C:\\Users\\LUCAS\\Desktop\\projetos\\EstudosApiFrontEnd\\EstudosApiFront.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Lucas\\DS\\A17\\EstudosApiFront\\EstudosApiFront.csproj",
+        "projectUniqueName": "C:\\Users\\LUCAS\\Desktop\\projetos\\EstudosApiFrontEnd\\EstudosApiFront.csproj",
         "projectName": "EstudosApiFront",
-        "projectPath": "D:\\Lucas\\DS\\A17\\EstudosApiFront\\EstudosApiFront.csproj",
-        "packagesPath": "C:\\Users\\etechas\\.nuget\\packages\\",
-        "outputPath": "D:\\Lucas\\DS\\A17\\EstudosApiFront\\obj\\",
+        "projectPath": "C:\\Users\\LUCAS\\Desktop\\projetos\\EstudosApiFrontEnd\\EstudosApiFront.csproj",
+        "packagesPath": "C:\\Users\\LUCAS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LUCAS\\Desktop\\projetos\\EstudosApiFrontEnd\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\etechas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LUCAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -49,6 +49,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -68,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

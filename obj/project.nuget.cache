@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "YxqAoq/92/E=",
+  "dgSpecHash": "iv/VC1XpHwA=",
   "success": true,
-  "projectFilePath": "D:\\Lucas\\DS\\A17\\EstudosApiFront\\EstudosApiFront.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\LUCAS\\Desktop\\projetos\\EstudosApiFrontEnd\\EstudosApiFront.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\LUCAS\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
