@@ -2,6 +2,19 @@
     ViewData["Title"] = "Página Inicial";
 }
 
-<div class="text-center">
+@* <div class="text-center">
     <h1 class="display-4">Estudos API</h1>
-</div>
+</div> *@
+
+<main class="homepage d-flex align-items-center">
+    <div class="homepage-text">
+        <h1>Organize seus estudos.</h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+            <br><br><br><br>
+        <a class="btn btn-primary" asp-area="" asp-controller="Usuario" asp-action="Index">Começar</a>
+    </div>
+    <img class="studyImg" src="@Url.Content("~/images/study.png")">
+</main>
