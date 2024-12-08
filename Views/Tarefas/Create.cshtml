@@ -1,0 +1,54 @@
+@model EstudosApiFront.Models.TarefaViewModel
+
+@{
+    ViewBag.Title = "Criar Nova Tarefa";
+}
+
+<h2>Criar uma Nova Tarefa</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataTermino, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.DataTermino, new { @class = "form-control" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.Nome, new { @class = "form-control" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prioridade, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.DropDownListFor(model => model.Prioridade,
+                                      Html.GetEnumSelectList(typeof(EstudosApiFront.Models.Enuns.PrioridadeEnum)),
+                                      "---Selecione---", new { @class = "form-control" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Completo, new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.CheckBoxFor(model => model.Completo, new { @class = "form-check-input" })
+            </div>
+        </div>
+         <div class="form-group">
+            @Html.LabelFor(model => model.CategoriaId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.CategoriaId, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6">
+                <input type="submit" value="Salvar Tarefa" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}

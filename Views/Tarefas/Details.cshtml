@@ -1,0 +1,32 @@
+@model EstudosApiFront.Models.TarefaViewModel
+@{
+    ViewBag.Title ="Detalhes da Tarefa";
+}
+<h2>Detalhes da Tarefa</h2>
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+        <dd>@Html.DisplayFor(model => model.Id)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.DataTermino)</dt>
+        <dd>@Html.DisplayFor(model => model.DataTermino)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+        <dd>@Html.DisplayFor(model => model.Nome)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.Prioridade)</dt>
+        <dd>@Html.DisplayFor(model => model.Prioridade)</dd>
+            
+        <dt>@Html.DisplayNameFor(model => model.Completo)</dt>
+        <dd>@Html.DisplayFor(model => model.Completo)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.CategoriaId)</dt>
+        <dd>@Html.DisplayFor(model => model.CategoriaId)</dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new {id = Model.Id}) |
+    @Html.ActionLink("Retornar", "Index")
+</p>

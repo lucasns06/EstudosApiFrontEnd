@@ -24,20 +24,14 @@
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>Nome</th>
-                                <th>Prioridade</th>
-                                <th>Completo</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var tarefa in categoria.Tarefas)
                             {
                                 <tr>
-                                    <td>@tarefa.Id</td>
                                     <td>@tarefa.Nome</td>
-                                    <td>@tarefa.Prioridade</td>
-                                    <td>@tarefa.Completo</td>
                                 </tr>
                             }
                         </tbody>
