@@ -46,9 +46,26 @@ body {
   max-width: 450px;
   width: 100%;
 }
-.nav-link:hover{
-  color: rgb(0, 68, 255);
+
+.bar{
+  display: block;
+  width: 0;
+  height: 2px;
+  opacity: 0;
+  background: rgb(0, 68, 255);
+  transition: width 250ms ease, opacity 250ms ease;
 }
+.nav-link{
+  transform: translateY(2px);
+}
+.nav-link:hover {
+  color: rgb(0, 68, 255) !important;
+}
+.nav-link:hover .bar {
+  width: 100%; 
+  opacity: 1; 
+}
+
 @media (max-width: 768px ) {
   .studyImg {
     max-width: 300px;

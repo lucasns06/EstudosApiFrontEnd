@@ -75,7 +75,7 @@ namespace EstudosApiFrontEnd.Controllers
                     UsuarioViewModel uLogado = JsonConvert.DeserializeObject<UsuarioViewModel>(serialized);
                     HttpContext.Session.SetString("SessionTokenUsuario", uLogado.Token);
                     TempData["Mensagem"] = string.Format("Bem-vindo {0}!!!", uLogado.Username);
-                    return RedirectToAction("Index", "Personagens");
+                    return RedirectToAction("Index", "Categorias");
                 }
                 else
                 {
