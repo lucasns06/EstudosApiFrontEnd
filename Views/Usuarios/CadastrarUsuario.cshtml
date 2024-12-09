@@ -1,0 +1,42 @@
+<!--Namespace da classe de Modelo-->
+@model EstudosApiFrontEnd.Models.UsuarioViewModel
+<!--Título da View-->
+@{
+    ViewBag.Title = "Registrar";
+}
+<!--Configuração de mensagem temporária-->
+@if (@TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["MensagemErro"]
+    </div>
+}
+<h2 class="text-center">Criação de novos Usuários</h2>
+<hr />
+<div class="formPrincipal d-flex justify-content-center align-items-center">
+    <!-- Método que será chamado se o usuário fizer o Post -->
+    @using (Html.BeginForm("Registrar", "Usuarios", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="form-label">Usuário</label>
+                <div class="col-md-12">
+                    <!--Campo TextBox -->
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Senha</label>
+                <div class="col-md-12">
+                    <!--TextBox de Senha-->
+                    @Html.PasswordFor(model => model.PasswordString, new { @class = "form-control" })
+                </div>
+            </div><br />
+            <input type="submit" value="Registrar" class="btn btn-primary" />
+            <!--Exemplo de Link (Texto, View, Controller) -->
+            @Html.ActionLink("Retornar", "Index", "Home", null, new { @class = "btn btn-warning" })
+        </div>
+    }
+    <img class="userImg" src="@Url.Content("~/images/user.png")">
+</div>

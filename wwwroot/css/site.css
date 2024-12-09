@@ -28,12 +28,6 @@ body {
   width: 50px;
   margin-right: 5px;
 }
-.user {
-  width: 30px;
-  height: 30px;
-  background: rgb(100, 100, 100);
-  border-radius: 100%;
-}
 .homepage{
   margin-top: 92px;
   justify-content: space-between;
@@ -43,6 +37,10 @@ body {
 }
 .homepage-text p{
   color: rgb(22, 23, 26);
+}
+.userImg{
+  width: 100%;
+  max-width: 256px;
 }
 .studyImg {
   max-width: 450px;
@@ -60,5 +58,11 @@ body {
   .homepage{
     flex-direction: column;
     text-align: center;
+  }
+  .userImg{
+    max-width: 128px;
+  }
+  .formPrincipal{
+    flex-direction: column-reverse;
   }
 }
