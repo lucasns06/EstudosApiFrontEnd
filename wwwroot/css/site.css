@@ -33,10 +33,11 @@ body {
   justify-content: space-between;
 }
 .homepage-text h1{
-  font-size: 50px;
+  font-weight: 600;
 }
-.homepage-text p{
+.homepage-text h3{
   color: rgb(22, 23, 26);
+  font-weight: 400;
 }
 .userImg{
   width: 100%;
@@ -56,6 +57,7 @@ body {
   transition: width 250ms ease, opacity 250ms ease;
 }
 .nav-link{
+  font-size: large;
   transform: translateY(2px);
 }
 .nav-link:hover {
