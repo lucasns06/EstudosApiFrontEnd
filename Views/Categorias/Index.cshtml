@@ -15,9 +15,8 @@
         @TempData["MensagemErro"]</div>
 }
 <h2>Lista de Categorias</h2>
-<p> <!--Links apontando para views na mesma pasta-->
-    @Html.ActionLink("Criar Nova Categoria", "Create")
-</p>
+<a href="/Categorias/Create" class="btn btn-success btn-sm">Criar Nova Categoria</a>
+<br>
 <table class="table">
     <thead>
         <tr>
@@ -50,11 +49,11 @@
                     </table>
                 </td>
                 <td><!--Coluna para Links/botões-->
-                @Html.ActionLink("Editar", "Edit", new { id = categoria.Id }) |
-                @Html.ActionLink("Detalhes", "Details", new { id = categoria.Id }) |
-                @Html.ActionLink("Deletar", "Delete", new { id = categoria.Id }
-                , new { onclick = "return confirm('Deseja realmente deletar esta Categoria? Lembrando que vai deletar as tarefas dentro da categoria junto!');"})
-            </td>
+                    @Html.ActionLink("Editar", "Edit", new { id = categoria.Id }, new { @class = "btn btn-primary btn-sm" }) 
+                    @Html.ActionLink("Detalhes", "Details", new { id = categoria.Id }, new {@class ="btn btn-info btn-sm"}) 
+                    @Html.ActionLink("Deletar", "Delete", new { id = categoria.Id }
+                    , new { @class ="btn btn-danger btn-sm", onclick = "return confirm('Deseja realmente deletar esta Categoria? Lembrando que vai deletar as tarefas dentro da categoria junto!');"})
+                </td>
             </tr>
         }
     </tbody>

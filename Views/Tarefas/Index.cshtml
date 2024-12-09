@@ -14,9 +14,8 @@
         @TempData["MensagemErro"]</div>
 }
 <h2>Lista de Tarefas</h2>
-<p> <!--Links apontando para views na mesma pasta-->
-    @Html.ActionLink("Criar Nova Tarefa", "Create")
-</p>
+<a href="/Tarefas/Create" class="btn btn-success btn-sm">Criar Nova Tarefa</a>
+<br>
 <table class="table">
     <tr><!--Títulos das colunas da tabela-->
         <th>@Html.DisplayNameFor(model => model.Id)</th>
@@ -38,10 +37,10 @@
             <td>@Html.DisplayFor(modelItem => item.Completo)</td>
             <td>@Html.DisplayFor(modelItem => item.CategoriaId)</td>
             <td><!--Coluna para Links/botões-->
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) 
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new {@class ="btn btn-info btn-sm"}) 
                 @Html.ActionLink("Deletar", "Delete", new { id = item.Id }
-                , new { onclick = "return confirm('Deseja realmente deletar esta Tarefa?');"})
+                , new { @class ="btn btn-danger btn-sm", onclick = "return confirm('Deseja realmente deletar esta Tarefa?');"})
             </td>
         </tr>
     }

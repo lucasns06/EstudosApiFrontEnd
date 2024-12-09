@@ -32,6 +32,6 @@
 </div>
 
 <p>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Retornar", "Index")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+    <a href="/Categorias" class="btn btn-info btn-sm">Retornar</a>
 </p>
