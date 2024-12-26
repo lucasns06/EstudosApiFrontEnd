@@ -29,8 +29,10 @@ body {
   margin-right: 5px;
 }
 .homepage{
-  margin-top: 92px;
+  /* margin-top: 92px; */
   justify-content: space-between;
+  min-height: 83dvh;
+  align-content: center;
 }
 .homepage-text h1{
   font-weight: 600;
@@ -77,6 +79,7 @@ body {
   .homepage{
     flex-direction: column;
     text-align: center;
+    justify-content: center;
   }
   .userImg{
     max-width: 128px;
