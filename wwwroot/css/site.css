@@ -1,6 +1,11 @@
 html {
   font-size: 14px;
 }
+.permanent-marker-regular {
+  font-family: "Permanent Marker", serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 @media (min-width: 768px) {
   html {
@@ -28,18 +33,32 @@ body {
   width: 50px;
   margin-right: 5px;
 }
+.logo-nome{
+  font-family: "Permanent Marker", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #207fe6 !important;
+}
 .homepage{
-  /* margin-top: 92px; */
   justify-content: space-between;
   min-height: 83dvh;
   align-content: center;
 }
 .homepage-text h1{
   font-weight: 600;
+  animation: entry 2s ease;
+}
+@keyframes entry {
+  0%{opacity: 0; transform: translateX(-50px);}
+  100%{opacity: 1; transform: translateX(0);}
 }
 .homepage-text h3{
   color: rgb(22, 23, 26);
   font-weight: 400;
+  animation: entry 3s ease;
+}
+.btn-home{
+  animation: entry 4s ease;
 }
 .userImg{
   width: 100%;
@@ -49,7 +68,6 @@ body {
   max-width: 450px;
   width: 100%;
 }
-
 .bar{
   display: block;
   width: 0;
