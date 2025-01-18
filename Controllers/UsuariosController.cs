@@ -101,7 +101,6 @@ namespace EstudosApiFrontEnd.Controllers
             {
                 HttpClient httpClient = new HttpClient();
 
-                //Novo: Recuperação informação da sessão
                 string login = HttpContext.Session.GetString("SessionUsername"); 
                 string uriComplementar = $"GetByLogin/{login}";
                 HttpResponseMessage response = await httpClient.GetAsync(uriBase + uriComplementar);
@@ -168,7 +167,7 @@ namespace EstudosApiFrontEnd.Controllers
                 {
                     string mensagem = "Senha alterada com sucesso.";
                     TempData["Mensagem"] = mensagem; 
-                    return Json(mensagem); 
+                    return RedirectToAction("IndexInformacoes");
                 }
                 else
                     throw new System.Exception(serialized);

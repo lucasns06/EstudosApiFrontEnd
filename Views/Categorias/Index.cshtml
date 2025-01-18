@@ -35,11 +35,11 @@
                     @Html.DisplayFor(model => categoria.Nome)
                 </td>
                 <td>
-                    <table class="table table-sm">
+                    <table class="table table-sm ">
                         <tbody>
                             @foreach (var tarefa in categoria.Tarefas)
                             {
-                                <tr>
+                                <tr class="bg-light shadow-sm">
                                     <td>@tarefa.Nome</td>
                                 </tr>
                             }
@@ -47,11 +47,11 @@
                     </table>
                 </td>
                 <td class="">
-                    @Html.ActionLink("Editar", "Edit", new { id = categoria.Id }, new { @class = "btn btn-primary btn-sm" }) 
-                    @Html.ActionLink("Detalhes", "Details", new { id = categoria.Id }, new { @class = "btn btn-info btn-sm" }) 
+                    @Html.ActionLink("Editar", "Edit", new { id = categoria.Id }, new { @class = "btn btn-primary btn-sm shadow" }) 
+                    @Html.ActionLink("Detalhes", "Details", new { id = categoria.Id }, new { @class = "btn btn-secondary btn-sm shadow" }) 
                     @Html.ActionLink("Deletar", "Delete", new { id = categoria.Id },
                         new { 
-                            @class = "btn btn-danger btn-sm", 
+                            @class = "btn btn-danger btn-sm shadow", 
                             onclick = "return confirm('Deseja realmente deletar esta Categoria? Lembrando que vai deletar as tarefas dentro da categoria junto!');" 
                         })
                 </td>

@@ -32,7 +32,7 @@
 
 
             <div class="container">
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white ">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white">
                     <div class="container-fluid ">
                         @if (string.IsNullOrEmpty(sessao))
                         {
@@ -81,7 +81,7 @@
                                             asp-action="IndexInformacoes">Perfil <span class="bar"></span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Sair">Sair<span class="bar"></span></a>
+                                        <a class="btn btn-outline-dark leave" asp-area="" asp-controller="Usuarios" asp-action="Sair">Sair<span class="bar"></span></a>
                                     </li>
                                 }
                                 @if (string.IsNullOrEmpty(sessao))
