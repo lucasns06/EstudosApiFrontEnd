@@ -8,22 +8,23 @@
     <div class="alert alert-success" role="alert">
         @TempData["Mensagem"]</div>
 }
-<!--Configuração para exibir mensagem de erro -->
 @if (@TempData["MensagemErro"] != null)
 {
     <div class="alert alert-danger" role="alert">
         @TempData["MensagemErro"]</div>
 }
 <div class="d-flex flex-column align-items-center">
-    <h2 class="">Categorias</h2>
-    <a href="/Categorias/Create" class="btn btn-success btn-sm">Criar Nova Categoria</a>
+    <h2 class="mb-4">Categorias</h2>
+    <a href="/Categorias/Create" class="btn btn-success btn-lg mb-3">Criar Nova Categoria</a>
 </div>
 <br>
-<table class="table">
-    <thead>
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
         <tr>
             <th>Categorias</th>
             <th>Tarefas</th>
+            <th>Ações</th> 
         </tr>
     </thead>
     <tbody>
@@ -45,19 +46,16 @@
                         </tbody>
                     </table>
                 </td>
-                <td><!--Coluna para Links/botões-->
+                <td class="d-flex justify-content-center gap-2">
                     @Html.ActionLink("Editar", "Edit", new { id = categoria.Id }, new { @class = "btn btn-primary btn-sm" }) 
-                    @Html.ActionLink("Detalhes", "Details", new { id = categoria.Id }, new {@class ="btn btn-info btn-sm"}) 
-                    @Html.ActionLink("Deletar", "Delete", new { id = categoria.Id }
-                    , new { @class ="btn btn-danger btn-sm", onclick = "return confirm('Deseja realmente deletar esta Categoria? Lembrando que vai deletar as tarefas dentro da categoria junto!');"})
-                </td>   
+                    @Html.ActionLink("Detalhes", "Details", new { id = categoria.Id }, new { @class = "btn btn-info btn-sm" }) 
+                    @Html.ActionLink("Deletar", "Delete", new { id = categoria.Id },
+                        new { 
+                            @class = "btn btn-danger btn-sm", 
+                            onclick = "return confirm('Deseja realmente deletar esta Categoria? Lembrando que vai deletar as tarefas dentro da categoria junto!');" 
+                        })
+                </td>
             </tr>
         }
     </tbody>
 </table>
-                @* <td><!--Coluna para Links/botões-->
-                    @Html.ActionLink("Editar", "Edit", new { id = categoria.Id }, new { @class = "btn btn-primary btn-sm" }) 
-                    @Html.ActionLink("Detalhes", "Details", new { id = categoria.Id }, new {@class ="btn btn-info btn-sm"}) 
-                    @Html.ActionLink("Deletar", "Delete", new { id = categoria.Id }
-                    , new { @class ="btn btn-danger btn-sm", onclick = "return confirm('Deseja realmente deletar esta Categoria? Lembrando que vai deletar as tarefas dentro da categoria junto!');"})
-                </td> *@

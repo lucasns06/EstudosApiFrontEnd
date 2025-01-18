@@ -7,41 +7,45 @@
     <div class="alert alert-success" role="alert">
         @TempData["Mensagem"]</div>
 }
-<!--Configuração para exibir mensagem de erro -->
 @if (@TempData["MensagemErro"] != null)
 {
     <div class="alert alert-danger" role="alert">
         @TempData["MensagemErro"]</div>
 }
 <div class="d-flex flex-column align-items-center">
-    <h2>Tarefas</h2>
-    <a href="/Tarefas/Create" class="btn btn-success btn-sm">Criar Nova Tarefa</a>
+    <h2 class="mb-4">Tarefas</h2>
+    <a href="/Tarefas/Create" class="btn btn-success btn-lg mb-3">Criar Nova Tarefa</a>
 </div>
 <br>
-<table class="table">
-    <tr><!--Títulos das colunas da tabela-->
-        <th>@Html.DisplayNameFor(model => model.DataTermino)</th>
-        <th>@Html.DisplayNameFor(model => model.Nome)</th>
-        <th>@Html.DisplayNameFor(model => model.Prioridade)</th>
-        <th>@Html.DisplayNameFor(model => model.Completo)</th>
-        @* <th>@Html.DisplayNameFor(model => model.CategoriaId)</th> *@
-        <th></th>
-    </tr>
-    <!--Looping para escrever os dados na tabela-->
-    @foreach (var item in Model)
-    {
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.DataTermino)</td>
-            <td>@Html.DisplayFor(modelItem => item.Nome)</td>
-            <td>@Html.DisplayFor(modelItem => item.Prioridade)</td>
-            <td>@Html.DisplayFor(modelItem => item.Completo)</td>
-            @* <td>@Html.DisplayFor(modelItem => item.CategoriaId)</td> *@
-            <td><!--Coluna para Links/botões-->
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) 
-                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new {@class ="btn btn-info btn-sm"}) 
-                @Html.ActionLink("Deletar", "Delete", new { id = item.Id }
-                , new { @class ="btn btn-danger btn-sm", onclick = "return confirm('Deseja realmente deletar esta Tarefa?');"})
-            </td>
+            <th>@Html.DisplayNameFor(model => model.DataTermino)</th>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.Prioridade)</th>
+            <th>@Html.DisplayNameFor(model => model.Completo)</th>
+            <th>Ações</th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.DataTermino)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Prioridade)</td>
+                <td>@Html.DisplayFor(modelItem => item.Completo)</td>
+                <td class="d-flex justify-content-center gap-2">
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) 
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-sm" }) 
+                    @Html.ActionLink("Deletar", "Delete", new { id = item.Id },
+                        new { 
+                            @class = "btn btn-danger btn-sm", 
+                            onclick = "return confirm('Deseja realmente deletar esta Tarefa?');" 
+                        })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
