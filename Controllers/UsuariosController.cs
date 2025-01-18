@@ -102,8 +102,8 @@ namespace EstudosApiFrontEnd.Controllers
                 HttpClient httpClient = new HttpClient();
 
                 //Novo: Recuperação informação da sessão
-                string login = HttpContext.Session.GetString("SessionUsername"); string uriComplementar =
-                $"GetByLogin/{login}";
+                string login = HttpContext.Session.GetString("SessionUsername"); 
+                string uriComplementar = $"GetByLogin/{login}";
                 HttpResponseMessage response = await httpClient.GetAsync(uriBase + uriComplementar);
                 string serialized = await response.Content.ReadAsStringAsync(); if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -129,7 +129,8 @@ namespace EstudosApiFrontEnd.Controllers
             try
             {
                 HttpClient httpClient = new HttpClient();
-                string login = HttpContext.Session.GetString("SessionUsername"); string uriComplementar = $"GetByLogin/{login}";
+                string login = HttpContext.Session.GetString("SessionUsername"); 
+                string uriComplementar = $"GetByLogin/{login}";
                 HttpResponseMessage response = await httpClient.GetAsync(uriBase + uriComplementar);
                 string serialized = await response.Content.ReadAsStringAsync(); TempData["TituloModalExterno"] = "Alteração de Senha"; if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -175,6 +176,24 @@ namespace EstudosApiFrontEnd.Controllers
             catch (System.Exception ex)
             {
                 return Json(ex.Message);
+            }
+        }
+        [HttpGet]
+        public ActionResult Sair()
+        {
+            try
+            {
+                HttpContext.Session.Remove("SessionTokenUsuario");
+                HttpContext.Session.Remove("SessionUsername");
+                HttpContext.Session.Remove("SessionPerfilUsuario");
+                HttpContext.Session.Remove("SessionIdUsuario");
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch (System.Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("IndexInformacoes");
             }
         }
     }

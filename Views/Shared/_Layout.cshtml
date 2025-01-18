@@ -40,8 +40,7 @@
                                 <img src="@Url.Content("~/images/study_icon.png")" class="headerImg">
                             </a>
                             <a class="navbar-brand logo-nome" asp-area="" asp-controller="Home" asp-action="Index">EstudosApi</a>
-                        }
-                        @if (!string.IsNullOrEmpty(sessao)){
+                        }else{
                             <a asp-area="" asp-controller="Categorias" asp-action="Index">
                                 <img src="@Url.Content("~/images/study_icon.png")" class="headerImg">
                             </a>
@@ -81,6 +80,7 @@
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios"
                                             asp-action="IndexInformacoes">Perfil <span class="bar"></span></a>
                                     </li>
+                                     <a class="" asp-area="" asp-controller="Usuarios" asp-action="Sair">Sair</a>
                                 }
                                 @if (string.IsNullOrEmpty(sessao))
                                 {

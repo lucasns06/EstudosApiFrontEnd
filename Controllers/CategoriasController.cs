@@ -16,6 +16,10 @@ namespace EstudosApiFront.Controllers
         public string uriBase = "https://estudosapi.azurewebsites.net/Categorias/";
         public IActionResult Index()
         {
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
             return View();
         }
 
@@ -34,6 +38,10 @@ namespace EstudosApiFront.Controllers
         {
             try
             {
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                    {
+                        return RedirectToAction("Sair", "Usuarios");
+                    }
                 string uriComplementar = "GetAll";
                 HttpClient httpClient = new HttpClient();
 
@@ -42,7 +50,6 @@ namespace EstudosApiFront.Controllers
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    
                     List<CategoriaViewModel> listaCategorias = await Task.Run(() => JsonConvert.DeserializeObject<List<CategoriaViewModel>>(serialized));
 
                     return View(listaCategorias);
