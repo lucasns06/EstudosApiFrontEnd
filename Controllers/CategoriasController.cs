@@ -17,9 +17,9 @@ namespace EstudosApiFront.Controllers
         public IActionResult Index()
         {
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
-                {
-                    return RedirectToAction("Sair", "Usuarios");
-                }
+            {
+                return RedirectToAction("Sair", "Usuarios");
+            }
             return View();
         }
 
@@ -27,7 +27,7 @@ namespace EstudosApiFront.Controllers
         public IActionResult Error()
         {
             return View("Error!");
-        } 
+        }
         [HttpGet]
         public IActionResult Create()
         {
@@ -39,9 +39,9 @@ namespace EstudosApiFront.Controllers
             try
             {
                 if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
-                    {
-                        return RedirectToAction("Sair", "Usuarios");
-                    }
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
                 string uriComplementar = "GetAll";
                 HttpClient httpClient = new HttpClient();
 
@@ -64,7 +64,7 @@ namespace EstudosApiFront.Controllers
                 TempData["MensagemErro"] = ex.Message;
                 return RedirectToAction("Index");
             }
-        } 
+        }
         [HttpGet]
         public async Task<ActionResult> EditAsync(int? id)
         {
@@ -174,15 +174,16 @@ namespace EstudosApiFront.Controllers
             try
             {
                 HttpClient httpClient = new HttpClient();
- 
+
                 HttpResponseMessage response = await httpClient.DeleteAsync(uriBase + id.ToString());
                 string serialized = await response.Content.ReadAsStringAsync();
 
-                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     TempData["Mensagem"] = string.Format("Categoria Id {0} removida com sucesso", id);
                     return RedirectToAction("Index");
-                }else
+                }
+                else
                     throw new System.Exception(serialized);
             }
             catch (System.Exception ex)

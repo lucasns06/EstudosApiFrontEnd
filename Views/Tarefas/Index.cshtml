@@ -13,29 +13,29 @@
     <div class="alert alert-danger" role="alert">
         @TempData["MensagemErro"]</div>
 }
-<h2>Lista de Tarefas</h2>
-<a href="/Tarefas/Create" class="btn btn-success btn-sm">Criar Nova Tarefa</a>
+<div class="d-flex flex-column align-items-center">
+    <h2>Tarefas</h2>
+    <a href="/Tarefas/Create" class="btn btn-success btn-sm">Criar Nova Tarefa</a>
+</div>
 <br>
 <table class="table">
     <tr><!--Títulos das colunas da tabela-->
-        <th>@Html.DisplayNameFor(model => model.Id)</th>
         <th>@Html.DisplayNameFor(model => model.DataTermino)</th>
         <th>@Html.DisplayNameFor(model => model.Nome)</th>
         <th>@Html.DisplayNameFor(model => model.Prioridade)</th>
         <th>@Html.DisplayNameFor(model => model.Completo)</th>
-        <th>@Html.DisplayNameFor(model => model.CategoriaId)</th>
+        @* <th>@Html.DisplayNameFor(model => model.CategoriaId)</th> *@
         <th></th>
     </tr>
     <!--Looping para escrever os dados na tabela-->
     @foreach (var item in Model)
     {
         <tr>
-            <td>@Html.DisplayFor(modelItem => item.Id)</td>
             <td>@Html.DisplayFor(modelItem => item.DataTermino)</td>
             <td>@Html.DisplayFor(modelItem => item.Nome)</td>
             <td>@Html.DisplayFor(modelItem => item.Prioridade)</td>
             <td>@Html.DisplayFor(modelItem => item.Completo)</td>
-            <td>@Html.DisplayFor(modelItem => item.CategoriaId)</td>
+            @* <td>@Html.DisplayFor(modelItem => item.CategoriaId)</td> *@
             <td><!--Coluna para Links/botões-->
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) 
                 @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new {@class ="btn btn-info btn-sm"}) 

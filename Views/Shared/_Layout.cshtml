@@ -80,7 +80,9 @@
                                         <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios"
                                             asp-action="IndexInformacoes">Perfil <span class="bar"></span></a>
                                     </li>
-                                     <a class="" asp-area="" asp-controller="Usuarios" asp-action="Sair">Sair</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Sair">Sair<span class="bar"></span></a>
+                                    </li>
                                 }
                                 @if (string.IsNullOrEmpty(sessao))
                                 {
@@ -100,7 +102,7 @@
             </div>
         }
     </header>
-    <div class="container">
+    <div class="container teste">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

@@ -34,10 +34,10 @@ namespace EstudosApiFront.Controllers
         {
             try
             {
-                 if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
-                    {
-                        return RedirectToAction("Sair", "Usuarios");
-                    }
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                {
+                    return RedirectToAction("Sair", "Usuarios");
+                }
                 string uriComplementar = "GetAll";
                 HttpClient httpClient = new HttpClient();
 
@@ -178,15 +178,16 @@ namespace EstudosApiFront.Controllers
             try
             {
                 HttpClient httpClient = new HttpClient();
- 
+
                 HttpResponseMessage response = await httpClient.DeleteAsync(uriBase + id.ToString());
                 string serialized = await response.Content.ReadAsStringAsync();
 
-                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     TempData["Mensagem"] = string.Format("Tarefa Id {0} removida com sucesso", id);
                     return RedirectToAction("Index");
-                }else
+                }
+                else
                     throw new System.Exception(serialized);
             }
             catch (System.Exception ex)
