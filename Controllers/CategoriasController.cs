@@ -33,16 +33,52 @@ namespace EstudosApiFront.Controllers
         {
             return View();
         }
+        // [HttpGet]
+        // public async Task<ActionResult> IndexAsync()
+        // {
+        //     try
+        //     {
+        //         if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+        //         {
+        //             return RedirectToAction("Sair", "Usuarios");
+        //         }
+        //         string uriComplementar = "GetAll";
+        //         HttpClient httpClient = new HttpClient();
+
+        //         HttpResponseMessage response = await httpClient.GetAsync(uriBase + uriComplementar);
+        //         string serialized = await response.Content.ReadAsStringAsync();
+
+        //         if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        //         {
+        //             List<CategoriaViewModel> listaCategorias = await Task.Run(() => JsonConvert.DeserializeObject<List<CategoriaViewModel>>(serialized));
+
+        //             return View(listaCategorias);
+        //         }
+        //         else
+        //         {
+        //             throw new System.Exception(serialized);
+        //         }
+        //     }
+        //     catch (System.Exception ex)
+        //     {
+        //         TempData["MensagemErro"] = ex.Message;
+        //         return RedirectToAction("Index");
+        //     }
+        // }
         [HttpGet]
         public async Task<ActionResult> IndexAsync()
         {
             try
             {
-                if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                string usuarioIdStr = HttpContext.Session.GetString("SessionIdUsuario");
+                if (string.IsNullOrEmpty(usuarioIdStr))
                 {
                     return RedirectToAction("Sair", "Usuarios");
                 }
-                string uriComplementar = "GetAll";
+
+                int usuarioId = int.Parse(usuarioIdStr);  
+
+                string uriComplementar = $"GetByUsuario/{usuarioId}";
                 HttpClient httpClient = new HttpClient();
 
                 HttpResponseMessage response = await httpClient.GetAsync(uriBase + uriComplementar);
@@ -50,8 +86,7 @@ namespace EstudosApiFront.Controllers
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    List<CategoriaViewModel> listaCategorias = await Task.Run(() => JsonConvert.DeserializeObject<List<CategoriaViewModel>>(serialized));
-
+                    List<CategoriaViewModel> listaCategorias = JsonConvert.DeserializeObject<List<CategoriaViewModel>>(serialized);
                     return View(listaCategorias);
                 }
                 else
@@ -65,6 +100,7 @@ namespace EstudosApiFront.Controllers
                 return RedirectToAction("Index");
             }
         }
+
         [HttpGet]
         public async Task<ActionResult> EditAsync(int? id)
         {
@@ -147,20 +183,41 @@ namespace EstudosApiFront.Controllers
         {
             try
             {
+                // Obtém o ID do usuário logado
+                string usuarioIdStr = HttpContext.Session.GetString("SessionIdUsuario");
+                if (string.IsNullOrEmpty(usuarioIdStr))
+                {
+                    return RedirectToAction("Sair", "Usuarios");  // Redireciona caso não esteja logado
+                }
+
+                int usuarioId = int.Parse(usuarioIdStr);  // Converte o ID do usuário para inteiro
+
+                // Adiciona o ID do usuário à categoria
+                categoria.UsuarioId = usuarioId;
+
+                if (categoria.UsuarioId == 0)
+                {
+                    throw new Exception("Usuário não logado ou ID de usuário inválido.");
+                }
+
+                // Cria o conteúdo da requisição com os dados da categoria
                 HttpClient httpClient = new HttpClient();
                 var content = new StringContent(JsonConvert.SerializeObject(categoria));
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
+                // Envia a requisição POST para criar a categoria
                 HttpResponseMessage response = await httpClient.PostAsync(uriBase, content);
                 string serialized = await response.Content.ReadAsStringAsync();
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-                    TempData["Mensagem"] = string.Format("categoria {0}, Id {1} salva com sucesso!", categoria.Nome, serialized);
+                    TempData["Mensagem"] = string.Format("Categoria '{0}' (Id {1}) salva com sucesso!", categoria.Nome, serialized);
                     return RedirectToAction("Index");
                 }
                 else
+                {
                     throw new System.Exception(serialized);
+                }
             }
             catch (System.Exception ex)
             {
@@ -168,6 +225,8 @@ namespace EstudosApiFront.Controllers
                 return RedirectToAction("Create");
             }
         }
+
+
         [HttpGet]
         public async Task<ActionResult> DeleteAsync(int id)
         {

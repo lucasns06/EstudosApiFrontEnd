@@ -34,11 +34,15 @@ namespace EstudosApiFront.Controllers
         {
             try
             {
-                if (string.IsNullOrEmpty(HttpContext.Session.GetString("SessionIdUsuario")))
+                string usuarioIdStr = HttpContext.Session.GetString("SessionIdUsuario");
+                if (string.IsNullOrEmpty(usuarioIdStr))
                 {
                     return RedirectToAction("Sair", "Usuarios");
                 }
-                string uriComplementar = "GetAll";
+
+                int usuarioId = int.Parse(usuarioIdStr);  
+
+                string uriComplementar = $"GetByUsuario2/{usuarioId}";
                 HttpClient httpClient = new HttpClient();
 
                 HttpResponseMessage response = await httpClient.GetAsync(uriBase + uriComplementar);
@@ -46,9 +50,7 @@ namespace EstudosApiFront.Controllers
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
-
-                    List<TarefaViewModel> listaTarefas = await Task.Run(() => JsonConvert.DeserializeObject<List<TarefaViewModel>>(serialized));
-
+                    List<TarefaViewModel> listaTarefas = JsonConvert.DeserializeObject<List<TarefaViewModel>>(serialized);
                     return View(listaTarefas);
                 }
                 else
@@ -62,11 +64,14 @@ namespace EstudosApiFront.Controllers
                 return RedirectToAction("Index");
             }
         }
+
         [HttpGet]
         public async Task<ActionResult> EditAsync(int? id)
         {
             try
             {
+                string usuarioIdStr = HttpContext.Session.GetString("SessionIdUsuario");
+                int usuarioId = int.Parse(usuarioIdStr);  
                 HttpClient httpClient = new HttpClient();
                 HttpResponseMessage response = await httpClient.GetAsync(uriBase + id.ToString());
 
@@ -76,7 +81,7 @@ namespace EstudosApiFront.Controllers
                 {
                     TarefaViewModel tarefa = await Task.Run(() => JsonConvert.DeserializeObject<TarefaViewModel>(serialized));
 
-                    HttpResponseMessage categoriaResponse = await httpClient.GetAsync("https://estudosapi.azurewebsites.net/Categorias/GetAll");
+                    HttpResponseMessage categoriaResponse = await httpClient.GetAsync($"https://estudosapi.azurewebsites.net/Categorias/GetByUsuario/{usuarioId}");
                     string categoriaSerialized = await categoriaResponse.Content.ReadAsStringAsync();
                     List<CategoriaViewModel> categorias = JsonConvert.DeserializeObject<List<CategoriaViewModel>>(categoriaSerialized);
                     ViewBag.Categorias = categorias;
